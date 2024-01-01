@@ -166,3 +166,6 @@ function RandArr () {
 
 
 
+ /*when start button pressed function is activated, immediatly timer should start and once up screen change to no longer display questions.
+ for each question loop should add time or minus time for each question answered. update time which will be used as score. best scores will do. minus time for incorrect 10 seconds, add 10 seconds for each correct.
+ need to save highscores to leader board. onclick event check answer if button clicked = correct answer button then +10 second else - 10 secods, change */
