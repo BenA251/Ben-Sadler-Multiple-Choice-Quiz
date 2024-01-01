@@ -92,10 +92,6 @@ const wrongAnswerBArr = [
 "The television" 
 ]
 
-/*var randomcorrectAnswerArr = [];
-var randomwrongAnswerAArr = [];
-var randomwrongAnswerBArr = []; */
-
 
 
 /*  
@@ -145,9 +141,14 @@ click through each question until conditions meet time zero or all questions ans
 */
 
 
+
+
 function game (QuestionArr, correctAnsArr, wrongAnsAArr, wrongAnsBArr) {
+  /*all function variables declared at top for easy access */
   var randomQArr = [];
-  var answerPositionArr = [];
+  var randomAArr = [];
+  var answerPositionArrInitial = [];
+  var answerPositionArrFinal = [];
   var i = 0;
   var numberOfRounds = 10;
   var Question = document.getElementById("question-title")
@@ -160,31 +161,59 @@ function game (QuestionArr, correctAnsArr, wrongAnsAArr, wrongAnsBArr) {
   /*while conditions ensures number of rounds does not exceed question Array length to avoid duplicate questions*/
   while (i < numberOfRounds || i < QuestionArr.length) {
     Rand1 = Math.floor(Math.random() * QuestionArr.length);
-    /*game will act out below*/
+    /*below runs until next question*/
     if (!randomQArr.includes(Rand1)) {
+      /*adds accepted number to array which keeps track of used questions throughout game*/
       randomQArr.push(Rand1);
+      /*command for dynamically updating question with current question */
       Question.innerHTML = QuestionArr[randomQArr[i]]; 
+      /*save correct Answer for later reference to check against user selection */
       correctAns = correctAnsArr[randomQArr[i]];
-
-
-    /*ensures choices are randomly positioned each time so correct answer is not always in choice A slot ect.*/    
-      
-    
-
-i++
-
-    answerPositionArr[0]
-    answerPositionArr[1]
-    answerPositionArr[2]
-    
-      ChoiceA.innerHTML = answerPositionArr[0]; 
-      ChoiceB.innerHTML = answerPositionArr[1]; 
-      ChoiceC.innerHTML = answerPositionArr[2]; 
-    
+      /*commands to enable randomly placing possible answers including correct in 3 available slots to avoid correct answer always being in same slot (e.g. always top answer)*/
+      answerPositionArrInitial = [correctAnsArr[randomQArr[i]], wrongAnsAArr[randomQArr[i]], wrongAnsBArr[randomQArr[i]]];
+      /* function to create array with three numbers from 0 - 2 which will be used to assign answers to slots */
+      randomAArr = RandArr();
+      /* combines two arrays to make final answer array to achieve random placement of answers*/
+      AnswerPositionArrFinal = [answerPositionArrInitial[randomAArr[0]],answerPositionArrInitial[randomAArr[1]],answerPositionArrInitial[randomAArr[2]]]
+      /* updates HTML with answers for selection*/
+      ChoiceA.innerHTML = AnswerPositionArrFinal[0]; 
+      ChoiceB.innerHTML = AnswerPositionArrFinal[1]; 
+      ChoiceC.innerHTML = AnswerPositionArrFinal[2]; 
+      i++
     }
   }
   
 }
+
+
+function RandArr () {
+  var randAArr = [];
+  var Rand2;
+  while (i < 3) {
+  Rand2 = Math.floor(Math.random() * 3);
+  /*below runs until next question*/
+  if (!randAArr.includes(Rand2)) {
+    randAArr.push(Rand2);
+    i++
+  }
+  }
+  return randAArr
+  }
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
 
 game (questionsArr, correctAnswerArr, wrongAnswerAArr, wrongAnswerBArr);
 
