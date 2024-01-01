@@ -95,6 +95,9 @@ const wrongAnswerBArr = [
 
 function game (QuestionArr, correctAnsArr, wrongAnsAArr, wrongAnsBArr) {
   /*all function variables declared at top for easy access */
+
+  var StartScreen = document.getElementById("start-screen")
+  var Questions = document.getElementById("questions")
   var randomQArr = [];
   var randomAArr = [];
   var answerPositionArrInitial = [];
@@ -107,6 +110,10 @@ function game (QuestionArr, correctAnsArr, wrongAnsAArr, wrongAnsBArr) {
   var ChoiceC = document.getElementById("ChoiceC")
   var correctAns;
   var Rand1;
+
+  /*upon click event hides startscreen and shows questions */
+  StartScreen.setAttribute("class", "hide");
+  Questions.removeAttribute("class", "hide");
 
   /*while conditions ensures number of rounds does not exceed question Array length to avoid duplicate questions*/
   while (i < numberOfRounds || i < QuestionArr.length) {
@@ -155,5 +162,7 @@ function RandArr () {
   
   
 
-game (questionsArr, correctAnswerArr, wrongAnswerAArr, wrongAnswerBArr);
+
+
+
 
