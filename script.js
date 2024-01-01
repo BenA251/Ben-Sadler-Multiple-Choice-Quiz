@@ -1,6 +1,6 @@
 /* Arrays for 20 Questions and Answers with Science and Inventions Theme*/
 
-var questionsArr = [
+const questionsArr = [
 "How many bones does an adult human have?",
 "What is the smallest unit of matter?",
 "What is the primary gas that makes up the Earth’s atmosphere?",
@@ -23,7 +23,7 @@ var questionsArr = [
 "What did Charles Babbage famously invent?"
 ]
 
-var correctAnswerArr = [
+const correctAnswerArr = [
 "206",
 "Atom",
 "Nitrogen",
@@ -46,7 +46,7 @@ var correctAnswerArr = [
 "The computer"
 ]
 
-var wrongAnswerAArr = [
+const wrongAnswerAArr = [
 "200",
 "Cell",
 "Oxygen",
@@ -69,7 +69,7 @@ var wrongAnswerAArr = [
 "The microwave"
 ]
 
-var wrongAnswerBArr = [
+const wrongAnswerBArr = [
 "216",
 "Molecule",
 "Carbon dioxide",
@@ -113,25 +113,9 @@ add to new array if not existing add plus one
 
 
 
-function generateQA (QuestionArr) {
-  var randomQArr = [];
-  var i = 0
-  while (i < 10) {
-    var Rand1 = Math.floor(Math.random() * QuestionArr.length);
-    if (!randomQArr.includes(Rand1)) {
-      randomQArr.push(Rand1);
-      i++
-    }
-  }
-  return randomQArr
-}
 
 
-var randomQuestionsArr = generateQA (questionsArr);
-console.log (randomQuestionsArr);
-
-
-
+/*need to ensure correct answer is'nt always in position A ect and answers positions are also randomised.*/
 
 
 
@@ -150,3 +134,59 @@ var startButton = document.querySelector("#start");
 startButton.click();
 
 */
+
+
+/* when event click on start function below is ran
+
+on click of start quiz coding quiz intro and button disappers and questions show
+click through each question until conditions meet time zero or all questions answered. (score 10)
+
+
+*/
+
+
+function game (QuestionArr, correctAnsArr, wrongAnsAArr, wrongAnsBArr) {
+  var randomQArr = [];
+  var answerPositionArr = [];
+  var i = 0;
+  var numberOfRounds = 10;
+  var Question = document.getElementById("question-title")
+  var ChoiceA = document.getElementById("ChoiceA")
+  var ChoiceB = document.getElementById("ChoiceB")
+  var ChoiceC = document.getElementById("ChoiceC")
+  var correctAns;
+  var Rand1;
+
+  /*while conditions ensures number of rounds does not exceed question Array length to avoid duplicate questions*/
+  while (i < numberOfRounds || i < QuestionArr.length) {
+    Rand1 = Math.floor(Math.random() * QuestionArr.length);
+    /*game will act out below*/
+    if (!randomQArr.includes(Rand1)) {
+      randomQArr.push(Rand1);
+      Question.innerHTML = QuestionArr[randomQArr[i]]; 
+      correctAns = correctAnsArr[randomQArr[i]];
+
+
+    /*ensures choices are randomly positioned each time so correct answer is not always in choice A slot ect.*/    
+      
+    
+
+i++
+
+    answerPositionArr[0]
+    answerPositionArr[1]
+    answerPositionArr[2]
+    
+      ChoiceA.innerHTML = answerPositionArr[0]; 
+      ChoiceB.innerHTML = answerPositionArr[1]; 
+      ChoiceC.innerHTML = answerPositionArr[2]; 
+    
+    }
+  }
+  
+}
+
+game (questionsArr, correctAnswerArr, wrongAnswerAArr, wrongAnswerBArr);
+
+
+*/ assign answers to array and generate new array with random placement.
