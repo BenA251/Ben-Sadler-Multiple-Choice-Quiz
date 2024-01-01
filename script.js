@@ -21,7 +21,7 @@ const questionsArr = [
 "In which year was the first submarine built, by Dutch engineer Cornelis Jacobszoon Drebbel?",
 "What was the world’s first postage stamp, issued in the United Kingdom in 1840 called?",
 "What did Charles Babbage famously invent?"
-]
+];
 
 const correctAnswerArr = [
 "206",
@@ -44,7 +44,7 @@ const correctAnswerArr = [
 "1620",
 "Penny Black",
 "The computer"
-]
+];
 
 const wrongAnswerAArr = [
 "200",
@@ -67,7 +67,7 @@ const wrongAnswerAArr = [
 "1750",
 "Penny Farthing",
 "The microwave"
-]
+];
 
 const wrongAnswerBArr = [
 "216",
@@ -90,57 +90,7 @@ const wrongAnswerBArr = [
 "1850",
 "Penny Red", 
 "The television" 
-]
-
-
-
-/*  
-A function which takes all the Q&A arrays and creates new arrays 10 entries which randomise order of questions so when the game is played the questions are in random order, this needs to also apply to arrays so correct answer and wrong answers display which correspond to question. It also ensures the same question is
-*/
-
-
-/* 
-pick random number within length of array
-check if in existing new array do not add i.
-add to new array if not existing add plus one
-
-*/
-
-
-
-
-
-
-/*need to ensure correct answer is'nt always in position A ect and answers positions are also randomised.*/
-
-
-
-
-
-
-
-/*
-
-console.log (document);
-var time = document.querySelector("#time");
-console.log(time.textContent)
-time.textContent = "45"
-
-var startButton = document.querySelector("#start");
-startButton.click();
-
-*/
-
-
-/* when event click on start function below is ran
-
-on click of start quiz coding quiz intro and button disappers and questions show
-click through each question until conditions meet time zero or all questions answered. (score 10)
-
-
-*/
-
-
+];
 
 
 function game (QuestionArr, correctAnsArr, wrongAnsAArr, wrongAnsBArr) {
@@ -174,11 +124,11 @@ function game (QuestionArr, correctAnsArr, wrongAnsAArr, wrongAnsBArr) {
       /* function to create array with three numbers from 0 - 2 which will be used to assign answers to slots */
       randomAArr = RandArr();
       /* combines two arrays to make final answer array to achieve random placement of answers*/
-      AnswerPositionArrFinal = [answerPositionArrInitial[randomAArr[0]],answerPositionArrInitial[randomAArr[1]],answerPositionArrInitial[randomAArr[2]]]
+      answerPositionArrFinal = [answerPositionArrInitial[randomAArr[0]],answerPositionArrInitial[randomAArr[1]],answerPositionArrInitial[randomAArr[2]]]
       /* updates HTML with answers for selection*/
-      ChoiceA.innerHTML = AnswerPositionArrFinal[0]; 
-      ChoiceB.innerHTML = AnswerPositionArrFinal[1]; 
-      ChoiceC.innerHTML = AnswerPositionArrFinal[2]; 
+      ChoiceA.innerHTML = answerPositionArrFinal[0]; 
+      ChoiceB.innerHTML = answerPositionArrFinal[1]; 
+      ChoiceC.innerHTML = answerPositionArrFinal[2]; 
       i++
     }
   }
@@ -189,6 +139,7 @@ function game (QuestionArr, correctAnsArr, wrongAnsAArr, wrongAnsBArr) {
 function RandArr () {
   var randAArr = [];
   var Rand2;
+  var i = 0;
   while (i < 3) {
   Rand2 = Math.floor(Math.random() * 3);
   /*below runs until next question*/
@@ -204,18 +155,5 @@ function RandArr () {
   
   
 
-
-
-
-
-
-
-
-
-
-
-
 game (questionsArr, correctAnswerArr, wrongAnswerAArr, wrongAnswerBArr);
 
-
-*/ assign answers to array and generate new array with random placement.
