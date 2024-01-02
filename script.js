@@ -116,6 +116,8 @@ var highscore2 = document.getElementById("2");
 var highscore3 = document.getElementById("3");
 var highscore4 = document.getElementById("4");
 var highscore5 = document.getElementById("5");
+var correctSound = document.getElementById("correctAudio");
+var incorrectSound = document.getElementById("incorrectAudio");
 
 
 function startGame() {
@@ -205,6 +207,7 @@ function gamePlayAnswerA() {
   Questions.setAttribute("class", "hide");
   }
   else if (ChoiceA.innerHTML === finalArray[arrayIndexTally + 1]) {
+  correctSound.play();
   numberOfRoundsTally++;
   arrayIndexTally = arrayIndexTally + 5;
   counter ++;
@@ -213,6 +216,7 @@ function gamePlayAnswerA() {
   ChoiceB.innerHTML = finalArray[arrayIndexTally + 3]
   ChoiceC.innerHTML = finalArray[arrayIndexTally + 4]
 } else {
+  incorrectSound.play();
   numberOfRoundsTally++;
   roundDuration = roundDuration - 10;
   arrayIndexTally = arrayIndexTally + 5;
@@ -229,6 +233,7 @@ function gamePlayAnswerB() {
     Questions.setAttribute("class", "hide");
     }
     else if (ChoiceB.innerHTML === finalArray[arrayIndexTally + 1]) {
+    correctSound.play();
     numberOfRoundsTally++;
     arrayIndexTally = arrayIndexTally + 5;
     counter ++;
@@ -237,6 +242,7 @@ function gamePlayAnswerB() {
     ChoiceB.innerHTML = finalArray[arrayIndexTally + 3]
     ChoiceC.innerHTML = finalArray[arrayIndexTally + 4]
   } else {
+    incorrectSound.play();
     numberOfRoundsTally++;
     roundDuration = roundDuration - 10;
     arrayIndexTally = arrayIndexTally + 5;
@@ -253,6 +259,7 @@ function gamePlayAnswerC() {
     Questions.setAttribute("class", "hide");
     }
     else if (ChoiceC.innerHTML === finalArray[arrayIndexTally + 1]) {
+    correctSound.play();      
     numberOfRoundsTally++;
     arrayIndexTally = arrayIndexTally + 5;
     counter ++;
@@ -261,6 +268,7 @@ function gamePlayAnswerC() {
     ChoiceB.innerHTML = finalArray[arrayIndexTally + 3];
     ChoiceC.innerHTML = finalArray[arrayIndexTally + 4];
   } else {
+    incorrectSound.play();
     numberOfRoundsTally++;
     roundDuration = roundDuration - 10;
     arrayIndexTally = arrayIndexTally + 5;
