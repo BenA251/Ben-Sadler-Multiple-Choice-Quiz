@@ -98,6 +98,7 @@ var Questions = document.getElementById("questions");
 var finalArray = [];
 var numberOfRounds = 10;
 var numberOfRoundsTally = 0;
+var arrayIndexTally = 0;
 var Question = document.getElementById("question-title");
 var ChoiceA = document.getElementById("ChoiceA");
 var ChoiceB = document.getElementById("ChoiceB");
@@ -108,7 +109,7 @@ var endScreen = document.getElementById("end-screen");
 var finalScore = document.getElementById("final-score");
 var correctAns;
 var Rand1;
-var roundDuration = 5;
+var roundDuration = 120;
 var myInterval;
 
 
@@ -120,12 +121,10 @@ Questions.removeAttribute("class", "hide");
 //generates array which has every 5 index 
 finalArray = generateQAArr(questionsArr, correctAnswerArr, wrongAnswerAArr, wrongAnswerBArr)
 
-Question.innerHTML = finalArray[0]
-ChoiceA.innerHTML = finalArray[2]
-ChoiceB.innerHTML = finalArray[3]
-ChoiceC.innerHTML = finalArray[4]
-
-numberOfRoundsTally = 1;
+Question.innerHTML = finalArray[arrayIndexTally]
+ChoiceA.innerHTML = finalArray[arrayIndexTally + 2]
+ChoiceB.innerHTML = finalArray[arrayIndexTally + 3]
+ChoiceC.innerHTML = finalArray[arrayIndexTally + 4]
 
 myInterval = setInterval(countdownTimer, 1000);
 
@@ -190,16 +189,73 @@ if (roundDuration < 0 || 10 === numberOfRoundsTally) {
   clearInterval(myInterval);
   Questions.setAttribute("class", "hide");
   endScreen.removeAttribute("class", "hide");
-  finalScore.innerHTML = roundDuration + 1;                                                                        
+  finalScore.innerHTML = scoreProcess(roundDuration);                                                                        
 }
 }
 
 
-/*function gamePlay() {
-
-
+function scoreProcess(score) {
+  if (score <= 0) {return 0}
+  else {return score};
 }
-*/
+
+
+function gamePlayAnswerA() {
+if (ChoiceA.innerHTML === finalArray[arrayIndexTally + 1]) {
+  numberOfRoundsTally++;
+  arrayIndexTally = arrayIndexTally + 5;
+  Question.innerHTML = finalArray[arrayIndexTally]
+  ChoiceA.innerHTML = finalArray[arrayIndexTally + 2]
+  ChoiceB.innerHTML = finalArray[arrayIndexTally + 3]
+  ChoiceC.innerHTML = finalArray[arrayIndexTally + 4]
+} else {
+  numberOfRoundsTally++;
+  roundDuration = roundDuration - 10;
+  arrayIndexTally = arrayIndexTally + 5;
+  Question.innerHTML = finalArray[arrayIndexTally]
+  ChoiceA.innerHTML = finalArray[arrayIndexTally + 2]
+  ChoiceB.innerHTML = finalArray[arrayIndexTally + 3]
+  ChoiceC.innerHTML = finalArray[arrayIndexTally + 4]
+}
+}
+
+function gamePlayAnswerB() {
+  if (ChoiceB.innerHTML === finalArray[arrayIndexTally + 1]) {
+    numberOfRoundsTally++;
+    arrayIndexTally = arrayIndexTally + 5;
+    Question.innerHTML = finalArray[arrayIndexTally]
+    ChoiceA.innerHTML = finalArray[arrayIndexTally + 2]
+    ChoiceB.innerHTML = finalArray[arrayIndexTally + 3]
+    ChoiceC.innerHTML = finalArray[arrayIndexTally + 4]
+  } else {
+    numberOfRoundsTally++;
+    roundDuration = roundDuration - 10;
+    arrayIndexTally = arrayIndexTally + 5;
+    Question.innerHTML = finalArray[arrayIndexTally]
+    ChoiceA.innerHTML = finalArray[arrayIndexTally + 2]
+    ChoiceB.innerHTML = finalArray[arrayIndexTally + 3]
+    ChoiceC.innerHTML = finalArray[arrayIndexTally + 4]
+  }
+  }
+
+function gamePlayAnswerC() {
+  if (ChoiceA.innerHTML === finalArray[arrayIndexTally + 1]) {
+    numberOfRoundsTally++;
+    arrayIndexTally = arrayIndexTally + 5;
+    Question.innerHTML = finalArray[arrayIndexTally];
+    ChoiceA.innerHTML = finalArray[arrayIndexTally + 2];
+    ChoiceB.innerHTML = finalArray[arrayIndexTally + 3];
+    ChoiceC.innerHTML = finalArray[arrayIndexTally + 4];
+  } else {
+    numberOfRoundsTally++;
+    roundDuration = roundDuration - 10;
+    arrayIndexTally = arrayIndexTally + 5;
+    Question.innerHTML = finalArray[arrayIndexTally];
+    ChoiceA.innerHTML = finalArray[arrayIndexTally + 2];
+    ChoiceB.innerHTML = finalArray[arrayIndexTally + 3];
+    ChoiceC.innerHTML = finalArray[arrayIndexTally + 4];
+  }
+  }
 
 
 
@@ -217,6 +273,4 @@ add answers in one array and questions and answers in another.
 add iteration on i, if i greater than 10 do run new script
 
  */
-
-
 
