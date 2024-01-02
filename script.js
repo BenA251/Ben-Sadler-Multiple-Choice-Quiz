@@ -93,53 +93,38 @@ const wrongAnswerBArr = [
 ];
 
 
-function game (QuestionArr, correctAnsArr, wrongAnsAArr, wrongAnsBArr) {
-  /*all function variables declared at top for easy access */
+var StartScreen = document.getElementById("start-screen");
+var Questions = document.getElementById("questions");
+var finalArray = [];
+var numberOfRounds = 10;
+var numberOfRoundsTally = 0;
+var Question = document.getElementById("question-title");
+var ChoiceA = document.getElementById("ChoiceA");
+var ChoiceB = document.getElementById("ChoiceB");
+var ChoiceC = document.getElementById("ChoiceC");
+var Timer = document.getElementById("time")
+var correctAns;
+var Rand1;
+var roundDuration = 59;
 
-  var StartScreen = document.getElementById("start-screen")
-  var Questions = document.getElementById("questions")
-  var randomQArr = [];
-  var randomAArr = [];
-  var answerPositionArrInitial = [];
-  var answerPositionArrFinal = [];
-  var i = 0;
-  var numberOfRounds = 10;
-  var Question = document.getElementById("question-title")
-  var ChoiceA = document.getElementById("ChoiceA")
-  var ChoiceB = document.getElementById("ChoiceB")
-  var ChoiceC = document.getElementById("ChoiceC")
-  var correctAns;
-  var Rand1;
 
-  /*upon click event hides startscreen and shows questions */
-  StartScreen.setAttribute("class", "hide");
-  Questions.removeAttribute("class", "hide");
+function startGame() {
 
-  /*while conditions ensures number of rounds does not exceed question Array length to avoid duplicate questions*/
-  while (i < numberOfRounds || i < QuestionArr.length) {
-    Rand1 = Math.floor(Math.random() * QuestionArr.length);
-    /*below runs until next question*/
-    if (!randomQArr.includes(Rand1)) {
-      /*adds accepted number to array which keeps track of used questions throughout game*/
-      randomQArr.push(Rand1);
-      /*command for dynamically updating question with current question */
-      Question.innerHTML = QuestionArr[randomQArr[i]]; 
-      /*save correct Answer for later reference to check against user selection */
-      correctAns = correctAnsArr[randomQArr[i]];
-      /*commands to enable randomly placing possible answers including correct in 3 available slots to avoid correct answer always being in same slot (e.g. always top answer)*/
-      answerPositionArrInitial = [correctAnsArr[randomQArr[i]], wrongAnsAArr[randomQArr[i]], wrongAnsBArr[randomQArr[i]]];
-      /* function to create array with three numbers from 0 - 2 which will be used to assign answers to slots */
-      randomAArr = RandArr();
-      /* combines two arrays to make final answer array to achieve random placement of answers*/
-      answerPositionArrFinal = [answerPositionArrInitial[randomAArr[0]],answerPositionArrInitial[randomAArr[1]],answerPositionArrInitial[randomAArr[2]]]
-      /* updates HTML with answers for selection*/
-      ChoiceA.innerHTML = answerPositionArrFinal[0]; 
-      ChoiceB.innerHTML = answerPositionArrFinal[1]; 
-      ChoiceC.innerHTML = answerPositionArrFinal[2]; 
-      i++
-    }
-  }
-  
+StartScreen.setAttribute("class", "hide");
+Questions.removeAttribute("class", "hide"); 
+
+//generates array which has every 5 index 
+finalArray = generateQAArr(questionsArr, correctAnswerArr, wrongAnswerAArr, wrongAnswerBArr)
+
+Question.innerHTML = finalArray[0]
+ChoiceA.innerHTML = finalArray[2]
+ChoiceB.innerHTML = finalArray[3]
+ChoiceC.innerHTML = finalArray[4]
+
+numberOfRoundsTally = 1;
+
+setInterval(countdownTimer, 1000);
+
 }
 
 
@@ -158,14 +143,77 @@ function RandArr () {
   return randAArr
   }
   
-  
-  
-  
 
+
+function generateQAArr(QuestionArr, correctAnsArr, wrongAnsAArr, wrongAnsBArr) {
+  var finalArr = [];
+  var i = 0;
+  var Rand1= [];
+  var randomQArr = [];
+  var randomAArr = [];
+  var answerPositionArrInitial = [];
+  var answerPositionArrFinal = [];
+
+  while (i < numberOfRounds) {
+    Rand1 = Math.floor(Math.random() * QuestionArr.length);
+    /*below runs until next question*/
+    if (!randomQArr.includes(Rand1)) {
+      /*adds accepted number to array which keeps track of used questions throughout game*/
+      randomQArr.push(Rand1);
+      /*command for dynamically updating question with current question */
+      finalArr.push(QuestionArr[randomQArr[i]]); 
+      /*save correct Answer for later reference to check against user selection */
+      finalArr.push(correctAnsArr[randomQArr[i]]);
+      /*commands to enable randomly placing possible answers including correct in 3 available slots to avoid correct answer always being in same slot (e.g. always top answer)*/
+      answerPositionArrInitial = [correctAnsArr[randomQArr[i]], wrongAnsAArr[randomQArr[i]], wrongAnsBArr[randomQArr[i]]];
+      /* function to create array with three numbers from 0 - 2 which will be used to assign answers to slots */
+      randomAArr = RandArr();
+      /* combines two arrays to make final answer array to achieve random placement of answers*/
+      answerPositionArrFinal = [answerPositionArrInitial[randomAArr[0]],answerPositionArrInitial[randomAArr[1]],answerPositionArrInitial[randomAArr[2]]]
+      /* updates HTML with answers for selection*/
+      finalArr.push(answerPositionArrFinal[0]); 
+      finalArr.push(answerPositionArrFinal[1]); 
+      finalArr.push(answerPositionArrFinal[2]); 
+      i++
+    }
+    }
+    return finalArr;
+}
+
+
+/* if reaches zero change screen */
+function countdownTimer() {
+Timer.innerHTML = roundDuration;
+roundDuration --;
+if (roundDuration < 0) {
+  Questions.setAttribute("class", "hide");
+  Timer.innerHTML = 0
+}
+}
+
+
+/*function gamePlay() {
+
+
+}
+*/
 
 
 
 
  /*when start button pressed function is activated, immediatly timer should start and once up screen change to no longer display questions.
  for each question loop should add time or minus time for each question answered. update time which will be used as score. best scores will do. minus time for incorrect 10 seconds, add 10 seconds for each correct.
- need to save highscores to leader board. onclick event check answer if button clicked = correct answer button then +10 second else - 10 secods, change */
+ need to save highscores to leader board. onclick event check answer if button clicked = correct answer button then +10 second else - 10 secods, change 
+ get button pressed and compare and add i.
+ 
+
+on click run function which updates with new question and answers.
+
+add answers in one array and questions and answers in another.
+
+add iteration on i, if i greater than 10 do run new script
+
+ */
+
+
+
