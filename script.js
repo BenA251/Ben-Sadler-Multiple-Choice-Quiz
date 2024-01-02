@@ -102,10 +102,14 @@ var Question = document.getElementById("question-title");
 var ChoiceA = document.getElementById("ChoiceA");
 var ChoiceB = document.getElementById("ChoiceB");
 var ChoiceC = document.getElementById("ChoiceC");
-var Timer = document.getElementById("time")
+var time = document.getElementById("time");
+var timer = document.getElementById("timer");
+var endScreen = document.getElementById("end-screen");
+var finalScore = document.getElementById("final-score");
 var correctAns;
 var Rand1;
-var roundDuration = 59;
+var roundDuration = 5;
+var myInterval;
 
 
 function startGame() {
@@ -123,10 +127,9 @@ ChoiceC.innerHTML = finalArray[4]
 
 numberOfRoundsTally = 1;
 
-setInterval(countdownTimer, 1000);
+myInterval = setInterval(countdownTimer, 1000);
 
 }
-
 
 function RandArr () {
   var randAArr = [];
@@ -143,8 +146,6 @@ function RandArr () {
   return randAArr
   }
   
-
-
 function generateQAArr(QuestionArr, correctAnsArr, wrongAnsAArr, wrongAnsBArr) {
   var finalArr = [];
   var i = 0;
@@ -183,11 +184,13 @@ function generateQAArr(QuestionArr, correctAnsArr, wrongAnsAArr, wrongAnsBArr) {
 
 /* if reaches zero change screen */
 function countdownTimer() {
-Timer.innerHTML = roundDuration;
+time.innerHTML = roundDuration;
 roundDuration --;
-if (roundDuration < 0) {
+if (roundDuration < 0 || 10 === numberOfRoundsTally) {
+  clearInterval(myInterval);
   Questions.setAttribute("class", "hide");
-  Timer.innerHTML = 0
+  endScreen.removeAttribute("class", "hide");
+  finalScore.innerHTML = roundDuration + 1;                                                                        
 }
 }
 
