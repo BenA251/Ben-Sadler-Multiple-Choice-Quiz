@@ -111,7 +111,7 @@ var correctAns;
 var Rand1;
 var roundDuration = 120;
 var myInterval;
-
+var counter = 0;
 
 function startGame() {
 
@@ -185,11 +185,12 @@ function generateQAArr(QuestionArr, correctAnsArr, wrongAnsAArr, wrongAnsBArr) {
 function countdownTimer() {
 time.innerHTML = roundDuration;
 roundDuration --;
-if (roundDuration < 0 || 10 === numberOfRoundsTally) {
+if (roundDuration < 0 || 9 === numberOfRoundsTally) {
   clearInterval(myInterval);
   Questions.setAttribute("class", "hide");
   endScreen.removeAttribute("class", "hide");
-  finalScore.innerHTML = scoreProcess(roundDuration);                                                                        
+  finalScore.innerHTML = scoreProcess(roundDuration);
+  time.innerHTML = finalScore.innerHTML                                                                       
 }
 }
 
@@ -201,9 +202,13 @@ function scoreProcess(score) {
 
 
 function gamePlayAnswerA() {
-if (ChoiceA.innerHTML === finalArray[arrayIndexTally + 1]) {
+  if (counter === 9) {
+  Questions.setAttribute("class", "hide");
+  }
+  else if (ChoiceA.innerHTML === finalArray[arrayIndexTally + 1]) {
   numberOfRoundsTally++;
   arrayIndexTally = arrayIndexTally + 5;
+  counter ++;
   Question.innerHTML = finalArray[arrayIndexTally]
   ChoiceA.innerHTML = finalArray[arrayIndexTally + 2]
   ChoiceB.innerHTML = finalArray[arrayIndexTally + 3]
@@ -212,6 +217,7 @@ if (ChoiceA.innerHTML === finalArray[arrayIndexTally + 1]) {
   numberOfRoundsTally++;
   roundDuration = roundDuration - 10;
   arrayIndexTally = arrayIndexTally + 5;
+  counter ++;
   Question.innerHTML = finalArray[arrayIndexTally]
   ChoiceA.innerHTML = finalArray[arrayIndexTally + 2]
   ChoiceB.innerHTML = finalArray[arrayIndexTally + 3]
@@ -220,9 +226,13 @@ if (ChoiceA.innerHTML === finalArray[arrayIndexTally + 1]) {
 }
 
 function gamePlayAnswerB() {
-  if (ChoiceB.innerHTML === finalArray[arrayIndexTally + 1]) {
+    if (counter === 9) {
+    Questions.setAttribute("class", "hide");
+    }
+    else if (ChoiceB.innerHTML === finalArray[arrayIndexTally + 1]) {
     numberOfRoundsTally++;
     arrayIndexTally = arrayIndexTally + 5;
+    counter ++;
     Question.innerHTML = finalArray[arrayIndexTally]
     ChoiceA.innerHTML = finalArray[arrayIndexTally + 2]
     ChoiceB.innerHTML = finalArray[arrayIndexTally + 3]
@@ -231,6 +241,7 @@ function gamePlayAnswerB() {
     numberOfRoundsTally++;
     roundDuration = roundDuration - 10;
     arrayIndexTally = arrayIndexTally + 5;
+    counter ++;
     Question.innerHTML = finalArray[arrayIndexTally]
     ChoiceA.innerHTML = finalArray[arrayIndexTally + 2]
     ChoiceB.innerHTML = finalArray[arrayIndexTally + 3]
@@ -239,9 +250,13 @@ function gamePlayAnswerB() {
   }
 
 function gamePlayAnswerC() {
-  if (ChoiceA.innerHTML === finalArray[arrayIndexTally + 1]) {
+    if (counter === 9) {
+    Questions.setAttribute("class", "hide");
+    }
+    else if (ChoiceC.innerHTML === finalArray[arrayIndexTally + 1]) {
     numberOfRoundsTally++;
     arrayIndexTally = arrayIndexTally + 5;
+    counter ++;
     Question.innerHTML = finalArray[arrayIndexTally];
     ChoiceA.innerHTML = finalArray[arrayIndexTally + 2];
     ChoiceB.innerHTML = finalArray[arrayIndexTally + 3];
@@ -250,6 +265,7 @@ function gamePlayAnswerC() {
     numberOfRoundsTally++;
     roundDuration = roundDuration - 10;
     arrayIndexTally = arrayIndexTally + 5;
+    counter ++;
     Question.innerHTML = finalArray[arrayIndexTally];
     ChoiceA.innerHTML = finalArray[arrayIndexTally + 2];
     ChoiceB.innerHTML = finalArray[arrayIndexTally + 3];
