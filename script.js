@@ -92,7 +92,6 @@ const wrongAnswerBArr = [
 "The television" 
 ];
 
-
 var StartScreen = document.getElementById("start-screen");
 var Questions = document.getElementById("questions");
 var finalArray = [];
@@ -112,21 +111,26 @@ var Rand1;
 var roundDuration = 120;
 var myInterval;
 var counter = 0;
+var highscore1 = document.getElementById("1");
+var highscore2 = document.getElementById("2");
+var highscore3 = document.getElementById("3");
+var highscore4 = document.getElementById("4");
+var highscore5 = document.getElementById("5");
+
 
 function startGame() {
 
-StartScreen.setAttribute("class", "hide");
-Questions.removeAttribute("class", "hide"); 
+  StartScreen.setAttribute("class", "hide");
+  Questions.removeAttribute("class", "hide"); 
 
-//generates array which has every 5 index 
-finalArray = generateQAArr(questionsArr, correctAnswerArr, wrongAnswerAArr, wrongAnswerBArr)
+  finalArray = generateQAArr(questionsArr, correctAnswerArr, wrongAnswerAArr, wrongAnswerBArr)
 
-Question.innerHTML = finalArray[arrayIndexTally]
-ChoiceA.innerHTML = finalArray[arrayIndexTally + 2]
-ChoiceB.innerHTML = finalArray[arrayIndexTally + 3]
-ChoiceC.innerHTML = finalArray[arrayIndexTally + 4]
+  Question.innerHTML = finalArray[arrayIndexTally]
+  ChoiceA.innerHTML = finalArray[arrayIndexTally + 2]
+  ChoiceB.innerHTML = finalArray[arrayIndexTally + 3]
+  ChoiceC.innerHTML = finalArray[arrayIndexTally + 4]
 
-myInterval = setInterval(countdownTimer, 1000);
+  myInterval = setInterval(countdownTimer, 1000);
 
 }
 
@@ -135,12 +139,11 @@ function RandArr () {
   var Rand2;
   var i = 0;
   while (i < 3) {
-  Rand2 = Math.floor(Math.random() * 3);
-  /*below runs until next question*/
-  if (!randAArr.includes(Rand2)) {
-    randAArr.push(Rand2);
-    i++
-  }
+    Rand2 = Math.floor(Math.random() * 3);
+    if (!randAArr.includes(Rand2)) {
+      randAArr.push(Rand2);
+      i++
+    }
   }
   return randAArr
   }
@@ -156,7 +159,6 @@ function generateQAArr(QuestionArr, correctAnsArr, wrongAnsAArr, wrongAnsBArr) {
 
   while (i < numberOfRounds) {
     Rand1 = Math.floor(Math.random() * QuestionArr.length);
-    /*below runs until next question*/
     if (!randomQArr.includes(Rand1)) {
       /*adds accepted number to array which keeps track of used questions throughout game*/
       randomQArr.push(Rand1);
@@ -177,29 +179,26 @@ function generateQAArr(QuestionArr, correctAnsArr, wrongAnsAArr, wrongAnsBArr) {
       i++
     }
     }
-    return finalArr;
+  return finalArr;
 }
-
 
 /* if reaches zero change screen */
 function countdownTimer() {
-time.innerHTML = roundDuration;
-roundDuration --;
-if (roundDuration < 0 || 9 === numberOfRoundsTally) {
-  clearInterval(myInterval);
-  Questions.setAttribute("class", "hide");
-  endScreen.removeAttribute("class", "hide");
-  finalScore.innerHTML = scoreProcess(roundDuration);
-  time.innerHTML = finalScore.innerHTML                                                                       
+  time.innerHTML = roundDuration;
+  roundDuration --;
+  if (roundDuration < 0 || 9 === numberOfRoundsTally) {
+    clearInterval(myInterval);
+    Questions.setAttribute("class", "hide");
+    endScreen.removeAttribute("class", "hide");
+    finalScore.innerHTML = scoreProcess(roundDuration);
+    time.innerHTML = finalScore.innerHTML                                                                       
+  }
 }
-}
-
 
 function scoreProcess(score) {
   if (score <= 0) {return 0}
   else {return score};
 }
-
 
 function gamePlayAnswerA() {
   if (counter === 9) {
@@ -273,20 +272,6 @@ function gamePlayAnswerC() {
   }
   }
 
-
-
-
- /*when start button pressed function is activated, immediatly timer should start and once up screen change to no longer display questions.
- for each question loop should add time or minus time for each question answered. update time which will be used as score. best scores will do. minus time for incorrect 10 seconds, add 10 seconds for each correct.
- need to save highscores to leader board. onclick event check answer if button clicked = correct answer button then +10 second else - 10 secods, change 
- get button pressed and compare and add i.
- 
-
-on click run function which updates with new question and answers.
-
-add answers in one array and questions and answers in another.
-
-add iteration on i, if i greater than 10 do run new script
-
- */
-
+function highScoreSave() {
+highscore1.innerHTML = document.getElementById("initials").value + " " + "Score:" + " " + finalScore.innerHTML
+};
