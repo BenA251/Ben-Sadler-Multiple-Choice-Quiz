@@ -282,4 +282,7 @@ function gamePlayAnswerC() {
 
 function highScoreSave() {
 highscore1.innerHTML = document.getElementById("initials").value + " " + "Score:" + " " + finalScore.innerHTML
+localStorage.setItem("score", highscore1.innerHTML);
 };
+
+highscore1.innerHTML = localStorage.getItem("score");
